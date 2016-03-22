@@ -6,6 +6,9 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname(dirname($vendorDir));
 
 return array(
+    'Webmozart\\PathUtil\\' => array($vendorDir . '/webmozart/path-util/src'),
+    'Webmozart\\Glob\\' => array($vendorDir . '/webmozart/glob/src'),
+    'Webmozart\\Assert\\' => array($vendorDir . '/webmozart/assert/src'),
     'React\\Promise\\' => array($vendorDir . '/react/promise/src'),
     'GuzzleHttp\\Stream\\' => array($vendorDir . '/guzzlehttp/streams/src'),
     'GuzzleHttp\\Ring\\' => array($vendorDir . '/guzzlehttp/ringphp/src'),
