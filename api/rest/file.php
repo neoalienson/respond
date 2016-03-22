@@ -1,5 +1,8 @@
 <?php 
 
+use Webmozart\Glob\Glob;
+use Webmozart\PathUtil\Path;
+
 /**
  * A protected API call to retrieve the current site
  * @uri /file/post
@@ -129,7 +132,8 @@ class ImageListResource extends Tonic\Resource {
      * @method GET
      */
     function get() {
-    
+
+
         // get token
 		$token = Utilities::ValidateJWTToken();
 
@@ -141,11 +145,15 @@ class ImageListResource extends Tonic\Resource {
             
             $arr = array();
             
-            // list files
+            // relative path
             $directory = SITES_LOCATION.'/'.$site['FriendlyId'].'/files/';
             
+            // get absolute path
+            $paths = Glob::glob(Path::makeAbsolute($directory, getcwd()));
+            $path = $paths[0];
+            
             //get all image files with a .html ext
-            $files = glob($directory . "*.*");
+            $files = Glob::glob($path . "/**/*.*");
 
             $arr = array();
             
@@ -153,12 +161,14 @@ class ImageListResource extends Tonic\Resource {
             
             //print each file name
             foreach($files as $file){
-                $f_arr = explode("/",$file);
-                $count = count($f_arr);
-                $filename = $f_arr[$count-1];
+                // skip thumbnails folder
+                if (strpos($file, 'thumbs/') !== false)
+                    continue;
                 
+                $filename = str_replace($path . "/" , "", $file);
+                                
                 // get extension
-                $parts = explode(".", $filename); 
+                $parts = explode(".", $file); 
             	$ext = end($parts); // get extension
         		$ext = strtolower($ext); // convert to lowercase
                 
@@ -167,8 +177,8 @@ class ImageListResource extends Tonic\Resource {
                 
                 if($is_image==true){
                     
-                    list($width, $height, $type, $attr) = Image::getImageInfo($directory.$filename);
-                    $size = filesize($directory.$filename);
+                    list($width, $height, $type, $attr) = Image::getImageInfo($directory . $filename);
+                    $size = filesize($directory . $filename);
                     
                     $file = array(
                         'filename' => $filename,
