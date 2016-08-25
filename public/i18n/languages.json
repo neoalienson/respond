@@ -1,0 +1,18 @@
+[
+	{
+		"code": "en",
+		"text": "English (en-US)"
+	},
+	{
+		"code": "es-ES",
+		"text": "Español (es-ES)"
+	},
+  {
+    "code": "gr-GR",
+    "text": "Ελληνικά (gr-GR)"
+  },
+  {
+    "code": "ru-RU",
+    "text": "Русский (ru-RU)"
+  }
+]

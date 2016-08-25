@@ -1,0 +1,94 @@
+<html>
+  <head>
+    <title>Respond</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#00ADE3">
+
+    <base href="/">
+    
+    <link href="app/shared/resources/icon.png" rel="icon">
+    <meta content="#00ADE3" name="msapplication-TileColor">
+    <meta content="#00ADE3" name="msapplication-TileImage">
+    <link href="app/shared/resources/icon.png" rel="apple-touch-icon">
+
+    <!-- css -->
+    <link rel="stylesheet" href="app/shared/resources/reset.css">
+    <link rel="stylesheet" href="app/shared/resources/app.css">
+
+    <!-- font -->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+
+    <style type="text/css">
+      body {
+        padding: 49px 0 0 0;
+        font-family: 'Open Sans', sans-serif;
+        margin: 0;
+        padding: 49px 0 0 0;
+      }
+
+      body .spinner {
+        width: 40px;
+        height: 40px;
+        margin: 100px auto;
+        background-color: #00ADE3;
+
+        border-radius: 100%;
+        -webkit-animation: sk-scaleout 1.0s infinite ease-in-out;
+        animation: sk-scaleout 1.0s infinite ease-in-out;
+      }
+
+      @-webkit-keyframes sk-scaleout {
+        0% { -webkit-transform: scale(0) }
+        100% {
+          -webkit-transform: scale(1.0);
+          opacity: 0;
+        }
+      }
+
+      @keyframes sk-scaleout {
+        0% {
+          -webkit-transform: scale(0);
+          transform: scale(0);
+        } 100% {
+          -webkit-transform: scale(1.0);
+          transform: scale(1.0);
+          opacity: 0;
+        }
+      }
+      </style>
+
+
+  </head>
+
+  <!-- Display the application -->
+  <body>
+    <respond-app>
+
+      <!-- loading -->
+      <div class="spinner" title="loading"></div>
+
+    </respond-app>
+  </body>
+  
+   <!-- load libs -->
+    <script src="app/libs/zone.js"></script>
+    <script src="app/libs/Reflect.js"></script>
+    <script src="app/libs/system.src.js"></script>
+
+    <!-- systemjs (dev)
+    <script src="systemjs.config.js"></script>
+    <script>
+      System.import('app').catch(function(err){ console.error(err);  });
+    </script> -->
+    
+    <!-- build (prod) -->
+    <script src="app/bundle.js"></script> 
+
+
+  <!-- Load resources -->
+  <script src="app/shared/resources/toast.js"></script>
+  <script src="app/libs/moment-with-locales.min.js"></script>
+  <script src="app/libs/dropzone.min.js"></script>
+  <link type="text/css" href="app/libs/dropzone.min.css" rel="stylesheet">
+
+</html>
