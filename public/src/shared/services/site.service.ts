@@ -1,12 +1,11 @@
-import {Injectable}     from '@angular/core'
-import {Http, Response} from '@angular/http'
-import {AuthHttp, AuthConfig} from 'angular2-jwt/angular2-jwt';
-import {Headers, RequestOptions} from '@angular/http'
-import {Observable} from 'rxjs/Observable'
+import { Injectable }     from '@angular/core';
+import { Http, Response } from '@angular/http';
+import { Headers, RequestOptions } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class SiteService {
-  constructor (private http: Http, private authHttp: AuthHttp, private authConfig: AuthConfig) {}
+  constructor (private http: Http) {}
 
   private _createUrl = 'api/sites/create';
   private _reloadUrl = 'api/sites/reload';
@@ -38,10 +37,14 @@ export class SiteService {
    */
   reload () {
 
-    return this.authHttp.get(this._reloadUrl);
+    let headers = new Headers();
+    headers.append('X-AUTH', 'Bearer ' + localStorage.getItem('id_token'));
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.get(this._reloadUrl, options);
 
   }
-  
+
   /**
    * Republishes the sitemap
    *
@@ -49,7 +52,11 @@ export class SiteService {
    */
   sitemap () {
 
-    return this.authHttp.get(this._sitemapUrl);
+    let headers = new Headers();
+    headers.append('X-AUTH', 'Bearer ' + localStorage.getItem('id_token'));
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.get(this._sitemapUrl, options);
 
   }
 
